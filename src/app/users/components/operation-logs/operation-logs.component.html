@@ -1,0 +1,18 @@
+<div class="p-4 flex flex-col">
+    <div class="flex justify-between mb-4">
+        <div class="text-3xl font-semibold">Operation logs</div>
+    </div>
+
+    <div class="flex gap-x-8 border">
+        <div class="p-2 w-1/4">User email</div>
+        <div class="p-2 w-1/4">Date</div>
+        <div class="p-2 w-1/4">Action</div>
+    </div>
+    <div class="flex flex-col border-x border-b divide-y">
+        <div class="bg-white flex gap-x-8" *ngFor="let log of logs">
+            <div class="p-2 w-1/4">{{log?.user_email}}</div>
+            <div class="p-2 w-1/4">{{log?.created_at | tsToDate}}</div>
+            <div class="p-2 w-1/4">{{log?.action}}</div>
+        </div>
+    </div>
+</div>

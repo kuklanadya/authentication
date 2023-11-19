@@ -1,0 +1,36 @@
+<div class="p-4 flex flex-col">
+    <div class="flex justify-between mb-4">
+        <div class="text-3xl font-semibold">Users list</div>
+        <div class="flex gap-x-4">
+            <button mat-button class="w-40 h-10 bg-blue-600 text-white flex justify-center items-center font-semibold"
+                (click)="generateNewUser()">Generate new user</button>
+            <button mat-button class="w-40 h-10 bg-blue-600 text-white flex justify-center items-center font-semibold"
+                (click)="blockAll()">Block all</button>
+            <button mat-button class="w-40 h-10 bg-blue-600 text-white flex justify-center items-center font-semibold"
+                (click)="restrictAll()">Restrict all</button>
+        </div>
+    </div>
+
+    <div class="flex gap-x-8 border">
+        <div class="p-2 w-1/4">Name</div>
+        <div class="p-2 w-1/4">Email</div>
+        <div class="p-2 w-1/4">Blocked</div>
+        <div class="p-2 w-1/4">Password restricted</div>
+    </div>
+    <div cdkDropList class="flex flex-col border-x border-b divide-y" (cdkDropListDropped)="drop($event)">
+        <div class="bg-white flex gap-x-8" *ngFor="let user of users" cdkDrag>
+            <div class="p-2 w-1/4">{{user.name}}</div>
+            <div class="p-2 w-1/4">{{user.email}}</div>
+            <button class="p-2 w-1/4 flex" (click)="changeOption(user, 'is_blocked', !user.is_blocked)"
+                [ngClass]="{'pointer-events-none': user.name === 'ADMIN'}">
+                <span>{{user.is_blocked ? 'Yes' : 'No'}}</span>
+                <mat-icon *ngIf="user.name !== 'ADMIN'" class="scale-75" fontIcon="edit"></mat-icon>
+            </button>
+            <button class="p-2 w-1/4 flex" (click)="changeOption(user, 'password_restricted', !user.password_restricted)"
+                [ngClass]="{'pointer-events-none': user.name === 'ADMIN'}">
+                <span>{{user.password_restricted ? 'Yes' : 'No'}}</span>
+                <mat-icon *ngIf="user.name !== 'ADMIN'" class="scale-75" fontIcon="edit"></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

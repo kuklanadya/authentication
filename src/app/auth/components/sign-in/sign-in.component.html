@@ -1,0 +1,45 @@
+<div class="h-full flex flex-col justify-center items-center">
+    <h1 class="font-semibold mb-8 text-[32px]">Sign in</h1>
+
+    <form class="flex flex-col w-[300px]" [formGroup]="signInForm">
+        <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input id="email" matInput [formControlName]="'email'">
+            <mat-error *ngIf="signInForm.get('email')?.hasError('required')">
+                Email is required
+            </mat-error>
+            <mat-error *ngIf="signInForm.get('email')?.hasError('email')">
+                Email is not valid
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input id="password" matInput type="password" [formControlName]="'password'">
+            <mat-error *ngIf="signInForm.get('password')?.hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Confirm password</mat-label>
+            <input id="passwordConfirm" matInput type="password" 
+                [formControlName]="'passwordConfirm'">
+            <mat-error *ngIf="signInForm.get('passwordConfirm')?.hasError('required')">
+                Password confirmation is required
+            </mat-error>
+            <mat-error *ngIf="signInForm.get('passwordConfirm')?.hasError('mustMatch')">
+                Passwords must match
+            </mat-error>
+        </mat-form-field>
+
+        <re-captcha id="recaptcha" name="recaptcha" (resolved)="resolveRecaptcha($event)" required
+            siteKey="6LfC-BApAAAAAB9S0nwkjvvfq1SaTpnTRPyy6X-k"></re-captcha>
+
+        <button mat-button
+            class="w-40  bg-blue-600 text-white flex justify-center mx-auto font-semibold mt-2"
+            [disabled]="!signInForm.valid" (click)="signIn(signInForm.value)">
+            <span *ngIf="!signInForm.disabled">Login</span>
+        </button>
+    </form>
+</div>

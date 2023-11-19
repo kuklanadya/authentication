@@ -1,0 +1,32 @@
+<aside class="fixed top-0 left-0 flex flex-col gap-y-2 h-full w-[160px] bg-blue-200 p-4">
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold"
+        *ngIf="currentUser?.name === 'ADMIN'" [routerLink]="['users']">
+        Users list
+    </button>
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold" 
+        *ngIf="currentUser?.name === 'ADMIN'" [routerLink]="['info']">
+        Info
+    </button>
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold" 
+        *ngIf="currentUser?.name === 'ADMIN'" [routerLink]="['auth-logs']">
+        Auth logs
+    </button>
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold" 
+        *ngIf="currentUser?.name === 'ADMIN'" [routerLink]="['operation-logs']">
+        Operation <br> logs
+    </button>
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold" 
+        *ngIf="!currentUser?.is_blocked" [routerLink]="['change-password']">
+        Change <br> password
+    </button>
+    <button mat-button class="px-4 py-2 text-xl bg-white text-blue-300 hover:border-blue-400 hover:font-semibold"
+        (click)="signOut()">
+        Sign out
+    </button>
+</aside>
+<div *ngIf="!currentUser?.is_blocked" class="ml-[160px] h-full">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="currentUser?.is_blocked" class="ml-[160px] h-full p-4 text-xl">
+    Your account is blocked. Please, contact the administrator.
+</div>
